@@ -42,12 +42,10 @@ public class Comic extends CommercialBook {
     }
 
     public void calculatePrice() {
-        // Logika perhitungan harga Comic
-        // Misalnya, dapat ditambahkan biaya tambahan untuk format digital, dll.
+
     }
+    
     public void calculateTax() {
-        // Logika perhitungan harga Comic
-        // Misalnya, dapat ditambahkan biaya tambahan untuk format digital, dll.
     }
 
     @Override

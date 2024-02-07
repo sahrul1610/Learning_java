@@ -22,7 +22,6 @@ public class EBook extends CommercialBook{
 
     public void calculatePrice() {
         // Logika perhitungan harga E-Book
-        // Misalnya, dapat ditambahkan biaya tambahan untuk format digital, dll.
     }
 
     @Override

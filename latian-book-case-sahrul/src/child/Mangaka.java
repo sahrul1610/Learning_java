@@ -25,13 +25,12 @@ public class Mangaka extends Person {
         this.rating = rating;
     }
 
-    // @Override
     // public String toString() {
     // return "Mangaka [rating=" + rating + "]";
     // }
-
+    @Override
     public String toString() {
-        return "Author [firstName= " + getFirstName() + ", lastName= " + getFullName() + ", country= " + getCountry()
+        return "Mangaka [firstName= " + getFirstName() + ", lastName= " + getFullName() + ", country= " + getCountry()
                 + ", age= " + getAge()
                 + ", rating= " + rating + "]";
     }

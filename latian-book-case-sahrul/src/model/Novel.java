@@ -19,7 +19,6 @@ public class Novel extends CommercialBook{
     }
 
 
-
     public Novelis getAuthor() {
         return author;
     }
@@ -44,7 +43,6 @@ public class Novel extends CommercialBook{
     
     public void calculatePrice() {
         // Logika perhitungan harga Novel
-        // Misalnya, dapat ditambahkan biaya tambahan untuk format digital, dll.
     }
 
 

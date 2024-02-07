@@ -2,7 +2,7 @@ package child;
 
 import parent.Person;
 
-public class Novelis extends Person{
+public class Novelis extends Person {
 
     private boolean serial;
     private String rating;
@@ -29,12 +29,28 @@ public class Novelis extends Person{
         this.rating = rating;
     }
 
+    // @Override
+    // public String toString() {
+    // return "Novelis [serial=" + serial + ", rating=" + rating + "]";
+    // }
+
     @Override
     public String toString() {
-        return "Novelis [serial=" + serial + ", rating=" + rating + "]";
+        return "Mangaka [firstName= " + getFirstName() + ", lastName= " + getFullName() + ", country= " + getCountry()
+                + ", age= " + getAge()
+                + ",serial= " + serial + ", rating= " + rating + "]";
     }
 
-   
+    // @Override
+    // public String toString() {
+    //     return "Novelis [\n" +
+    //             "  First Name: " + getFirstName() + "\n" +
+    //             "  Last Name: " + getFullName() + "\n" +
+    //             "  Country: " + getCountry() + "\n" +
+    //             "  Age: " + getAge() + "\n" +
+    //             "  Serial: " + serial + "\n" +
+    //             "  Rating: " + rating + "\n" +
+    //             "]";
+    // }
 
-    
 }

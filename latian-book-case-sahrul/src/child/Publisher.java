@@ -5,17 +5,34 @@ public class Publisher {
     private String country;
     private double productionCost;
 
+    // Default Constructor
+    public Publisher() {
+        this.publisherName = "";
+        this.country = "";
+        this.productionCost = 0.0;
+    }
+
+    
+
+    public Publisher(String publisherName) {
+        this.publisherName = publisherName;
+    }
+
+
+
+    // Constructor dengan Parameter
     public Publisher(String publisherName, String country, double productionCost) {
         this.publisherName = publisherName;
         this.country = country;
         this.productionCost = productionCost;
     }
 
-    @Override
     public String toString() {
-        return "Publisher [publisherName=" + publisherName + ", country=" + country + ", productionCost="
-                + productionCost + "]";
+        return "Publisher Name: " + publisherName + "\n" +
+                "Country: " + country + "\n" +
+                "Production Cost: " + productionCost;
     }
+
 
     public String getPublisherName() {
         return publisherName;
@@ -40,6 +57,4 @@ public class Publisher {
     public void setProductionCost(double productionCost) {
         this.productionCost = productionCost;
     }
-
-    
 }
