@@ -5,14 +5,10 @@ public class Publisher {
     private String country;
     private double productionCost;
 
-    // Default Constructor
-    public Publisher() {
-        this.publisherName = "";
-        this.country = "";
-        this.productionCost = 0.0;
-    }
 
-    
+    public Publisher() {
+
+    }
 
     public Publisher(String publisherName) {
         this.publisherName = publisherName;
