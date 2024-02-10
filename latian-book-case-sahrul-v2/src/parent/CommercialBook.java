@@ -3,7 +3,7 @@ import child.Publisher;
 import interfaces.CalculatePrice;
 
 
-public class CommercialBook implements CalculatePrice {
+public abstract class CommercialBook implements CalculatePrice {
     
     private String bookCode;
     private String title;
@@ -62,10 +62,6 @@ public class CommercialBook implements CalculatePrice {
                 + price + "]";
     }
 
-    @Override
-    public void calculatePrice() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'calculatePrice'");
-    }
+    
 
 }

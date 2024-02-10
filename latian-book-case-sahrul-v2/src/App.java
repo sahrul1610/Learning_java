@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,19 +22,18 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int choice;
 
-        // initializeAuthors();
-        RepositoryBook repository = new RepositoryBook();
-        repository.initateBookList();
-        repository.initializeDummyData();
-        List<CommercialBook> allBooks = repository.getAllBooks();
-        for (CommercialBook commercialBook : allBooks) {
-            System.out.println(commercialBook);
-        }
-
+        // // initializeAuthors();
         // RepositoryBook repository = new RepositoryBook();
-        repository.initializeDummyData();
+        // // repository.initateBookList();
+        // repository.initializeDummyData();
+        // List<CommercialBook> allBooks = repository.getAllBooks();
+        // for (CommercialBook commercialBook : allBooks) {
+        // System.out.println(commercialBook);
+        // }
 
-        // Assuming you have added books to the repositor
+        // // RepositoryBook repository = new RepositoryBook();
+        // repository.initializeDummyData();
+
         do {
             System.out.println("Main Menu");
             System.out.println("1. Book");
@@ -41,24 +41,29 @@ public class App {
             System.out.println("3. Publisher");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1:
-                    displayBookMenu(scanner);
-                    break;
-                case 2:
-                    displayAuthorMenu(scanner);
-                    break;
-                case 3:
-                    displayPublisherMenu(scanner);
-                    break;
-                case 0:
-                    System.out.println("Exiting...");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+            try {
+                choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        displayBookMenu(scanner);
+                        break;
+                    case 2:
+                        displayAuthorMenu(scanner);
+                        break;
+                    case 3:
+                        displayPublisherMenu(scanner);
+                        break;
+                    case 0:
+                        System.out.println("Exiting...");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); 
+                choice = -1; 
             }
         } while (choice != 0);
 
@@ -69,7 +74,7 @@ public class App {
     private static void displayBookMenu(Scanner scanner) {
         int choice;
         RepositoryBook repository = new RepositoryBook();
-        repository.initateBookList();
+        repository.initializeDummyData();
         List<CommercialBook> books = repository.getAllBooks();
         do {
             System.out.println("\nBook Menu Searching");
@@ -86,16 +91,13 @@ public class App {
 
             switch (choice) {
                 case 1:
-                    // Logika untuk mencari data book dengan price paling murah
                     findBookWithLowestPrice(books);
                     break;
                 case 2:
-                    // Logika untuk mencari data book dengan price paling mahal
                     findBookWithHighestPrice(books);
                     // belum
                     break;
                 case 3:
-                    // Logika untuk mencari data book berdasarkan range price
                     System.out.print("Enter minimum price: ");
                     double minPrice = scanner.nextDouble();
                     System.out.print("Enter maximum price: ");
@@ -103,59 +105,31 @@ public class App {
                     findBooksInPriceRange(books, minPrice, maxPrice);
                     break;
                 case 4:
-                    // Logika untuk mencari comic berdasarkan rating mangaka
                     findComicsByMangakaRating(books, scanner);
                     break;
                 case 5:
-                    // Logika untuk mencari book berdasarkan country dari publisher
                     System.out.print("Enter publisher country: ");
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
                     String publisherCountry = scanner.nextLine();
                     findBooksByPublisherCountry(books, publisherCountry);
                     break;
                 case 6:
-                    // Logika untuk mencari book berdasarkan country dari author
                     System.out.print("Enter author country: ");
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
                     String authorCountry = scanner.nextLine();
                     findBooksByAuthorCountry(books, authorCountry);
 
                     break;
                 case 7:
-                    // Logika untuk mencari data comic yang memiliki price paling mahal
                     findComicWithHighestPrice(books);
                     break;
                 case 0:
-                    // Kembali ke menu utama
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
         } while (choice != 0);
-    }
-
-    private static void findBooksByAuthorCountry(List<CommercialBook> books, String authorCountry) {
-        List<CommercialBook> booksByAuthorCountry = books.stream()
-                .filter(book -> {
-                    if (book instanceof Novel) {
-                        return ((Novel) book).getAuthor().getCountry().equalsIgnoreCase(authorCountry);
-                    } else if (book instanceof Comic) {
-                        return ((Comic) book).getAuthor().getCountry().equalsIgnoreCase(authorCountry);
-                    } else if (book instanceof EBook) {
-                        return ((EBook) book).getAuthor().getCountry().equalsIgnoreCase(authorCountry);
-                    } else {
-                        return false;
-                    }
-                })
-                .collect(Collectors.toList());
-
-        if (!booksByAuthorCountry.isEmpty()) {
-            System.out.println("Books by authors from " + authorCountry + ":");
-            booksByAuthorCountry.forEach(System.out::println);
-        } else {
-            System.out.println("No books found by authors from " + authorCountry + ".");
-        }
     }
 
     private static void findBookWithLowestPrice(List<CommercialBook> books) {
@@ -194,11 +168,11 @@ public class App {
 
     private static void findComicsByMangakaRating(List<CommercialBook> books, Scanner scanner) {
         System.out.print("Enter mangaka rating: ");
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
         String mangakaRating = scanner.nextLine();
 
         List<CommercialBook> comicsByRating = books.stream()
-                .filter(book -> book instanceof Comic) // Filter hanya buku yang merupakan komik
+                .filter(book -> book instanceof Comic)
                 .filter(book -> ((Comic) book).getAuthor().getRating().equalsIgnoreCase(mangakaRating))
                 .collect(Collectors.toList());
 
@@ -222,18 +196,41 @@ public class App {
         }
     }
 
-    private static void findComicWithHighestPrice(List<CommercialBook> books) {
-    Optional<CommercialBook> comicWithHighestPrice = books.stream()
-            .filter(book -> book instanceof Comic) // Filter hanya buku yang merupakan komik
-            .max(Comparator.comparingDouble(CommercialBook::getPrice)); // Cari buku dengan harga tertinggi
+    private static void findBooksByAuthorCountry(List<CommercialBook> books, String authorCountry) {
+        List<CommercialBook> booksByAuthorCountry = books.stream()
+                .filter(book -> {
+                    if (book instanceof Novel) {
+                        return ((Novel) book).getAuthor().getCountry().equalsIgnoreCase(authorCountry);
+                    } else if (book instanceof Comic) {
+                        return ((Comic) book).getAuthor().getCountry().equalsIgnoreCase(authorCountry);
+                    } else if (book instanceof EBook) {
+                        return ((EBook) book).getAuthor().getCountry().equalsIgnoreCase(authorCountry);
+                    } else {
+                        return false;
+                    }
+                })
+                .collect(Collectors.toList());
 
-    if (comicWithHighestPrice.isPresent()) {
-        System.out.println("Comic with the highest price:");
-        System.out.println(comicWithHighestPrice.get());
-    } else {
-        System.out.println("No comic found.");
+        if (!booksByAuthorCountry.isEmpty()) {
+            System.out.println("Books by authors from " + authorCountry + ":");
+            booksByAuthorCountry.forEach(System.out::println);
+        } else {
+            System.out.println("No books found by authors from " + authorCountry + ".");
+        }
     }
-}
+
+    private static void findComicWithHighestPrice(List<CommercialBook> books) {
+        Optional<CommercialBook> comicWithHighestPrice = books.stream()
+                .filter(book -> book instanceof Comic)
+                .max(Comparator.comparingDouble(CommercialBook::getPrice));
+
+        if (comicWithHighestPrice.isPresent()) {
+            System.out.println("Comic with the highest price:");
+            System.out.println(comicWithHighestPrice.get());
+        } else {
+            System.out.println("No comic found.");
+        }
+    }
 
     // sudah selesai
     private static void displayAuthorMenu(Scanner scanner) {

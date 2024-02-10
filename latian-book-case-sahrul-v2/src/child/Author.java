@@ -12,8 +12,14 @@ public class Author extends Person{
         
     }
 
-    public String getFullName() {
-        return getFirstName() + " " + getLastName();
+    // public String getFullName() {
+    //     return getFirstName() + " " + getLastName();
+    // }
+
+    @Override
+    public String toString() {
+        return "Author [firstName=" + getFirstName() + ", lastName=" + getLastName() + ", country=" + getCountry() + ", age=" + getAge()
+                + "]";
     }
 
 }

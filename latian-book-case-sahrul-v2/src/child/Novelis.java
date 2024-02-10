@@ -33,31 +33,17 @@ public class Novelis extends Author {
         this.rating = rating;
     }
 
-    public String getFullName() {
-        return getFirstName() + " " + getLastName();
-    }
-    // @Override
-    // public String toString() {
-    // return "Novelis [serial=" + serial + ", rating=" + rating + "]";
+    // public String getFullName() {
+    //     return getFirstName() + " " + getLastName();
     // }
+
 
     @Override
     public String toString() {
-        return "Novelis [firstName= " + getFirstName() + ", lastName= " + getFullName() + ", country= " + getCountry()
+        return "Novelis [firstName= " + getFirstName() + ", lastName= " + getLastName() + ", country= " + getCountry()
                 + ", age= " + getAge()
                 + ",serial= " + serial + ", rating= " + rating + "]";
     }
 
-    // @Override
-    // public String toString() {
-    //     return "Novelis [\n" +
-    //             "  First Name: " + getFirstName() + "\n" +
-    //             "  Last Name: " + getFullName() + "\n" +
-    //             "  Country: " + getCountry() + "\n" +
-    //             "  Age: " + getAge() + "\n" +
-    //             "  Serial: " + serial + "\n" +
-    //             "  Rating: " + rating + "\n" +
-    //             "]";
-    // }
 
 }

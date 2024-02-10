@@ -28,16 +28,14 @@ public class Mangaka extends Author {
         this.rating = rating;
     }
 
-    public String getFullName() {
-        return getFirstName() + " " + getLastName();
-    }
-
-    // public String toString() {
-    // return "Mangaka [rating=" + rating + "]";
+    // public String getFullName() {
+    //     return getFirstName() + " " + getLastName();
     // }
+
+
     @Override
     public String toString() {
-        return "Mangaka [firstName= " + getFirstName() + ", lastName= " + getFullName() + ", country= " + getCountry()
+        return "Mangaka [firstName= " + getFirstName() + ", lastName= " + getLastName() + ", country= " + getCountry()
                 + ", age= " + getAge()
                 + ", rating= " + rating + "]";
     }

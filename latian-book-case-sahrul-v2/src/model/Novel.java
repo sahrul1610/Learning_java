@@ -35,6 +35,7 @@ public class Novel extends CommercialBook {
         this.genre = genre;
     }
 
+    @Override
     public void calculatePrice() {
 
         String rating = author.getRating();
@@ -60,4 +61,7 @@ public class Novel extends CommercialBook {
                 + ", publisher=" + getPublisher().getPublisherName() + ", price="
                 + getPrice() + ", genre=" + getGenre() + "]";
     }
+
+    
+    
 }

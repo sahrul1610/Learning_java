@@ -51,11 +51,6 @@ public abstract class Person {
         this.age = age;
     }
     
-    @Override
-    public String toString() {
-        return "Author [firstName=" + firstName + ", lastName=" + lastName + ", country=" + country + ", age=" + age
-                + "]";
-    }
 
     public String getFullName() {
         return firstName + " " + lastName;
