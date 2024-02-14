@@ -61,10 +61,9 @@ public class LoanBookOrder implements CalculateLoanFee{
     }
 
     @Override
-    public void calculateLoanFee() {
-        // TODO Auto-generated method stub
-        this.loanFee = loanDuration * loanBook.getLoanPrice();
-        
+    public void calculateLoanFee() { 
+        double loanFee = loanDuration * loanBook.getLoanPrice();
+        setLoanFee(loanFee);
     }
 
 

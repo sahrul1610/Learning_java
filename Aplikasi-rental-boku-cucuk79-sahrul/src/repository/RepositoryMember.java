@@ -12,9 +12,6 @@ public class RepositoryMember {
         this.memberList = new ArrayList<>();
     }
 
-    // public void addBook(BookForLoan book) {
-    //     bookList.add(book);
-    // }
 
     public void initializeDummyData() {
 
@@ -22,7 +19,6 @@ public class RepositoryMember {
         memberList.add(new Member("M-001", "Risman", "Bandung"));
         memberList.add(new Member("M-002", "Budi", "Bandung"));
         memberList.add(new Member("M-003", "Resti", "Kab. Bandung"));
-
 
     }
 

@@ -21,10 +21,10 @@ public class Comic extends BookForLoan {
 
     @Override
     public void calculateBookLoanPrice() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'calculateBookLoanPrice'");
+        
         double rateStockPercentage = (getStock() < 10) ? 0.05 : 0.03;
-        double rateBookType = 0.10; // karena ini adalah Comic
+        double rateBookType = 0.10; 
+        // double rateBookType = PERCENTAGE_COMIC; 
         setLoanPrice((rateStockPercentage + rateBookType) * getPrice());
     }
 
