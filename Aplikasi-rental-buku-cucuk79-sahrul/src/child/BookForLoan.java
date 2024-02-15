@@ -30,11 +30,7 @@ public abstract class BookForLoan extends Book implements CalculateBookLoanPrice
         this.stock = stock;
     }
 
-    @Override
-    public void calculateBookLoanPrice() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'calculateBookLoanPrice'");
-    }
+
 
     @Override
     public String toString() {

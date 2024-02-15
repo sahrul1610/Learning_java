@@ -23,8 +23,8 @@ public class Comic extends BookForLoan {
     public void calculateBookLoanPrice() {
         
         double rateStockPercentage = (getStock() < 10) ? 0.05 : 0.03;
-        double rateBookType = 0.10; 
-        // double rateBookType = PERCENTAGE_COMIC; 
+        //double rateBookType = 0.10; 
+        double rateBookType = PERCENTAGE_COMIC; 
         setLoanPrice((rateStockPercentage + rateBookType) * getPrice());
     }
 

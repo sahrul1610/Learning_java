@@ -27,8 +27,8 @@ public class Novel extends BookForLoan{
     public void calculateBookLoanPrice() {
         
         double rateStockPercentage = (getStock() < 10) ? 0.05 : 0.03;
-        double rateBookType = 0.05; 
-        // double rateBookType = PERCENTAGE_NOVEL; 
+        //double rateBookType = 0.05; 
+        double rateBookType = PERCENTAGE_NOVEL; 
         setLoanPrice((rateStockPercentage + rateBookType) * getPrice());
     }
 

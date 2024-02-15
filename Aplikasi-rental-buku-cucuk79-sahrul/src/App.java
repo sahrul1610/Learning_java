@@ -70,26 +70,48 @@ public class App {
     }
 
     private static void displayAllBooks(List<BookForLoan> allBooks) {
-        System.out.println("List All Book:");
-        System.out.printf("%-4s%-12s%-45s%-20s%s%n", "No", "Book ID", "Title", "Author", "Stock");
+        System.out.printf(
+                "============================================================================================%n");
+        System.out.printf("                                    List All Book                                   %n");
+        System.out.printf(
+                "============================================================================================%n");
+        System.out.printf("|%-4s|%-12s|%-45s|%-20s|%s|%n", "No", "Book ID", "Title", "Author", "Stock");
+        System.out.printf(
+                "--------------------------------------------------------------------------------------------%n");
         int count = 1;
         for (BookForLoan book : allBooks) {
-            System.out.printf("%-4d%-12s%-45s%-20s%d%n", count++, book.getBookId(), book.getTitle(), book.getAuthor(),
+            System.out.printf("|%-4d|%-12s|%-45s|%-20s|%-5d|%n", count++, book.getBookId(), book.getTitle(),
+                    book.getAuthor(),
                     book.getStock());
+            System.out.printf(
+                    "--------------------------------------------------------------------------------------------%n");
         }
 
     }
 
     private static void processLoan(List<BookForLoan> allBooks, List<Member> allMembers) {
         displayAllBooks(allBooks);
-        System.out.println("\n0. Kembali ke Main Menu");
+        System.out.printf("|%-4s|%-85s|%n", "0", "Kembali ke Main Menu");
+        System.out.printf(
+                "--------------------------------------------------------------------------------------------%n");
         System.out.println("\n");
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Masukkan Member Id: ");
-        String memberId = scanner.nextLine();
-        if (memberId.equals("0")) {
-            System.out.println("Kembali ke Main Menu.");
-            return;
+        
+        boolean validMemberId = false;
+        Member member = null;
+        while (!validMemberId) {
+            System.out.print("Masukkan Member Id: ");
+            String memberId = scanner.nextLine();
+            if (memberId.equals("0")) {
+                System.out.println("Kembali ke Main Menu.");
+                return;
+            }
+            member = findMemberById(allMembers, memberId);
+            if (member != null) {
+                validMemberId = true;
+            } else {
+                System.out.println("Member Id tidak ditemukan. Silakan coba lagi.");
+            }
         }
 
         System.out.print("Masukkan Book Id: ");
@@ -100,10 +122,9 @@ public class App {
         BookForLoan book = findBookById(allBooks, bookId);
         if (book != null && book.getStock() > 0) {
             book.setStock(book.getStock() - 1);
-            Member member = findMemberById(allMembers, memberId);
-            LoanBookOrder loanOrder = new LoanBookOrder(generateLoanId(), member, book, loanDuration);
+            // Member member = findMemberById(allMembers, memberId);
+            LoanBookOrder loanOrder = new LoanBookOrder(member, book, loanDuration);
             loanOrderList.add(loanOrder);
-
             System.out.println("Loan Success!");
         } else {
             System.out.println("Book is not available for loan or does not exist.");
@@ -111,7 +132,6 @@ public class App {
     }
 
     private static BookForLoan findBookById(List<BookForLoan> allBooks, String bookId) {
-        // List<BookForLoan> allBooks = bookRepository.getAllBookForLoan();
         for (BookForLoan book : allBooks) {
             if (book.getBookId().equals(bookId)) {
                 return book;
@@ -121,7 +141,6 @@ public class App {
     }
 
     private static Member findMemberById(List<Member> allMembers, String memberId) {
-        // List<Member> allMembers = memberRepository.getAllMember();
         for (Member member : allMembers) {
             if (member.getMemberId().equals(memberId)) {
                 return member;
@@ -130,48 +149,55 @@ public class App {
         return null;
     }
 
-    private static String generateLoanId() {
-        // Implementasi pembuatan ID peminjaman
-        // return "Ord-" + (loanOrderList.size() + 1);
-        int nextId = loanOrderList.size() + 1;
-        String formattedId = String.format("%03d", nextId);
-        return "Ord-" + formattedId;
-    }
 
     private static void displayAllLoanOrders() {
-        System.out.println("Data Loan Book Order:");
-        System.out.printf("%-4s%-9s%-14s%-12s%-35s%-18s%-14s%-9s%n", "No", "Loan Id", "Member Name", "Book Id", "Title",
+        System.out.printf(
+                "--------------------------------------------------------------------------------------------------------------------------------------%n");
+        System.out.printf(
+                "                                                Data Loan Book Order                                                                  %n");
+        System.out.printf(
+                "--------------------------------------------------------------------------------------------------------------------------------------%n");
+        System.out.printf("|%-4s|%-9s|%-14s|%-12s|%-45s|%-18s|%-14s|%-9s|%n", "No", "Loan Id", "Member Name", "Book Id",
+                "Title",
                 "Loan Book Price", "Loan Duration", "Loan Fee");
+        System.out.printf(
+                "--------------------------------------------------------------------------------------------------------------------------------------%n");
         int count = 1;
         for (LoanBookOrder loanOrder : loanOrderList) {
-            System.out.printf("%-4d%-9s%-14s%-12s%-35s%-18.2f%-14d%-9.2f%n", count++, loanOrder.getLoanId(),
+            System.out.printf("|%-4d|%-9s|%-14s|%-12s|%-45s|%-18.2f|%-14d|%-9.2f|%n", count++, loanOrder.getLoanId(),
                     loanOrder.getMember().getMemberName(), loanOrder.getLoanBook().getBookId(),
                     loanOrder.getLoanBook().getTitle(), loanOrder.getLoanBook().getLoanPrice(),
                     loanOrder.getLoanDuration(), loanOrder.getLoanFee());
+            System.out.printf(
+                    "--------------------------------------------------------------------------------------------------------------------------------------%n");
         }
     }
 
     private static void processReturn() {
         System.out.println("Menu Return Book:\n");
-
         displayAllLoanOrders();
-        System.out.println("\n0. Kembali ke Main Menu");
+        System.out.printf("|%-4s|%-127s|%n", "0", "Kembali ke Main Menu");
+        System.out.printf(
+                "--------------------------------------------------------------------------------------------------------------------------------------%n");
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Masukkan Loan Id: ");
-        String loanId = scanner.nextLine();
-
-        if (loanId.equals("0")) {
-            System.out.println("Kembali ke Main Menu.");
-            return;
-        }
-
-        LoanBookOrder returnOrder = findLoanOrderById(loanId);
-        if (returnOrder != null) {
-            returnOrder.getLoanBook().setStock(returnOrder.getLoanBook().getStock() + 1);
-            loanOrderList.remove(returnOrder);
-            System.out.println("Return Book Success!");
-        } else {
-            System.out.println("Loan ID tidak valid atau buku sudah dikembalikan.");
+        boolean validloanId = false;
+        LoanBookOrder returnOrder = null;
+        while (!validloanId) {
+            System.out.print("\nMasukkan Loan Id: ");
+            String loanId = scanner.nextLine();
+            if (loanId.equals("0")) {
+                System.out.println("Kembali ke Main Menu.");
+                return;
+            }
+            returnOrder = findLoanOrderById(loanId);
+            if (returnOrder != null) {
+                validloanId = true;
+                returnOrder.getLoanBook().setStock(returnOrder.getLoanBook().getStock() + 1);
+                loanOrderList.remove(returnOrder);
+                System.out.println("Return Book Success!");
+            } else {
+                System.out.println("Loan ID tidak valid atau buku sudah dikembalikan.");
+            }
         }
     }
 

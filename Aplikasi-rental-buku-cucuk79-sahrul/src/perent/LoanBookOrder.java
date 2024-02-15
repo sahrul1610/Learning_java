@@ -10,13 +10,18 @@ public class LoanBookOrder implements CalculateLoanFee{
     private int loanDuration;
     private double loanFee;
     
-    public LoanBookOrder(String loanId, Member member, BookForLoan loanBook, int loanDuration) {
-        this.loanId = loanId;
+    private static int nextId =  1;
+    
+    public LoanBookOrder(Member member, BookForLoan loanBook, int loanDuration) {
+        this.loanId = generateLoanId();
         this.member = member;
         this.loanBook = loanBook;
         this.loanDuration = loanDuration;
         calculateLoanFee();
+        incrementLoanIdCounter();
+       
     }
+    
 
     public LoanBookOrder(){}
 
@@ -64,6 +69,22 @@ public class LoanBookOrder implements CalculateLoanFee{
     public void calculateLoanFee() { 
         double loanFee = loanDuration * loanBook.getLoanPrice();
         setLoanFee(loanFee);
+    }
+
+    private static String generateLoanId() {
+        String formattedId = String.format("%03d", nextId);
+        return "Ord-" + formattedId;
+    }
+
+    private static void incrementLoanIdCounter() {
+        nextId++;
+    }
+
+
+    @Override
+    public String toString() {
+        return "LoanBookOrder [loanId=" + loanId + ", member=" + member + ", loanBook=" + loanBook + ", loanDuration="
+                + loanDuration + ", loanFee=" + loanFee + "]";
     }
 
 
