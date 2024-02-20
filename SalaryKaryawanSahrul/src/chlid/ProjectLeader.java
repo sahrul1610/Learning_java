@@ -1,19 +1,14 @@
 package chlid;
 
-import interfaces.AllowanceCalculator;
+
+import model.AllowanceEmployee;
 import model.Placement;
-import perent.Employee;
 
-public class ProjectLeader extends Employee implements AllowanceCalculator{
+
+public class ProjectLeader extends AllowanceEmployee {
     private int totalProjects;
-    private double allowance;
+    //private double allowance;
 
-    // public ProjectLeader(String name, String address, int age, String employeeId, double salary, String jobDesc,
-    //         String placement, int totalProjects, double allowance) {
-    //     super(name, address, age, employeeId, jobDesc, placement);
-    //     this.totalProjects = totalProjects;
-    //     this.allowance = allowance;
-    // }
     
 
     public ProjectLeader() {
@@ -33,7 +28,7 @@ public class ProjectLeader extends Employee implements AllowanceCalculator{
 
     public ProjectLeader(int totalProjects, double allowance) {
         this.totalProjects = totalProjects;
-        this.allowance = allowance;
+        getAllowance();
     }
 
     public int getTotalProjects() {
@@ -42,30 +37,17 @@ public class ProjectLeader extends Employee implements AllowanceCalculator{
     public void setTotalProjects(int totalProjects) {
         this.totalProjects = totalProjects;
     }
-    public double getAllowance() {
-        return allowance;
-    }
-    public void setAllowance(double allowance) {
-        this.allowance = allowance;
-    }
+
     @Override
     public double calculateSalary() {
         double umk = getPlacement().getUmk();
         setSalary(umk* 2);
         return getSalary(); // 200% dari UMK
     }
+
     @Override
-    // public double calculateAllowance() {
-
-    //     if (totalProjects >= 2) {
-    //         return getSalary() * 0.15; // 15% dari salary
-    //     } else {
-    //         return getSalary() * 0.05; // 5% dari salary
-    //     }
-    // }
-
     public double calculateAllowance() {
-        double salary = getSalary(); // Mengambil gaji menggunakan getter
+        double salary = getSalary(); 
         double allowance;
         
         if (totalProjects >= 2) {
@@ -78,13 +60,9 @@ public class ProjectLeader extends Employee implements AllowanceCalculator{
         return allowance; 
     }
 
-    @Override
-    // public String toString() {
-    //     return "ProjectLeader [totalProjects=" + totalProjects + ", allowance=" + allowance + "]";
-    // }
-    
+    @Override    
     public String toString() {
         return "ProjectLeader [employeeId=" + getEmployeeId() + ", name=" + getName() + ", address=" + getAddress() +", age=" + getAge() +", jobDesc=" + getJobDesc() + ", placement="
-                + getPlacement().getCity() + ", totalProjects=" + totalProjects + ", allowance=" + allowance + ", salary=" + getSalary() + "]";
+                + getPlacement().getCity() + ", totalProjects=" + totalProjects + ", allowance=" + getAllowance() + ", salary=" + getSalary() + "]";
     }
 }

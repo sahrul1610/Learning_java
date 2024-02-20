@@ -11,11 +11,9 @@ import perent.Employee;
 
 public class EmployeeManager implements EmployeeManagement {
     private List<Employee> employees;
-    // private int nextEmployeeNumber;
 
     public EmployeeManager(List<Employee> employees) {
         this.employees = employees;
-        // this.nextEmployeeNumber = employees.size() + 1;
     }
 
     @Override
@@ -34,7 +32,6 @@ public class EmployeeManager implements EmployeeManagement {
             Placement newPlacement) {
         for (Employee employee : employees) {
             if (employee.getEmployeeId().equals(employeeId)) {
-                // Mengubah informasi karyawan
                 employee.setName(newName);
                 employee.setAddress(newAddress);
                 employee.setAge(newAge);
@@ -49,19 +46,15 @@ public class EmployeeManager implements EmployeeManagement {
     }
 
     @Override
-    // public void deleteEmployee(String employeeId) {
-    //     employees.removeIf(employee -> employee.getEmployeeId().equals(employeeId));
-    // }
-
     public boolean deleteEmployee(String employeeId) {
         for (Iterator<Employee> iterator = employees.iterator(); iterator.hasNext();) {
             Employee employee = iterator.next();
             if (employee.getEmployeeId().equals(employeeId)) {
                 iterator.remove();
-                return true; // Return true jika karyawan berhasil dihapus
+                return true; 
             }
         }
-        return false; // Return false jika karyawan tidak ditemukan
+        return false; 
     }
 
     @Override
@@ -115,7 +108,7 @@ public class EmployeeManager implements EmployeeManagement {
         double totalPayroll = 0;
         int index = 1;
         for (Employee employee : employees) {
-            double allowance = calculateAllowance(employee); // Menentukan nilai allowance
+            double allowance = showAllowance(employee); // Menentukan nilai allowance
             totalPayroll += (employee.getSalary() + allowance);
             System.out.printf("|%-4d|%-12s|%-12s|%-20s|%-20s|%-12.2f|%-10.2f|%n", index++, employee.getEmployeeId(),
                     employee.getName(), employee.getJobDesc(), employee.getPlacement().getCity(), allowance,
@@ -128,7 +121,7 @@ public class EmployeeManager implements EmployeeManagement {
                 "--------------------------------------------------------------------------------------------------");
     }
 
-    private double calculateAllowance(Employee employee) {
+    private double showAllowance(Employee employee) {
         if (employee instanceof Programmer) {
             return ((Programmer) employee).getAllowance();
         } else if (employee instanceof ProjectLeader) {

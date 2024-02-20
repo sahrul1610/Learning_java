@@ -1,18 +1,11 @@
 package chlid;
 
-import interfaces.AllowanceCalculator;
+import model.AllowanceEmployee;
 import model.Placement;
-import perent.Employee;
 
-public class Analyst extends Employee implements AllowanceCalculator {
+
+public class Analyst extends AllowanceEmployee{
     private double allowance;
-
-    // public Analyst(String name, String address, int age, String employeeId,
-    // String jobDesc,
-    // String placement, double allowance) {
-    // super(name, address, age, employeeId, jobDesc, placement);
-    // this.allowance = allowance;
-    // }
 
     public Analyst() {
 

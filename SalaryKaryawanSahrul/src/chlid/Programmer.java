@@ -1,13 +1,13 @@
 package chlid;
 
-import interfaces.AllowanceCalculator;
+import model.AllowanceEmployee;
 import model.Placement;
-import perent.Employee;
 
-public class Programmer extends Employee implements AllowanceCalculator{
+
+public class Programmer extends AllowanceEmployee{
     private String programmingLanguage;
     private int experiences;
-    private double allowance;
+
 
 
     public Programmer() {
@@ -21,7 +21,7 @@ public class Programmer extends Employee implements AllowanceCalculator{
         this.programmingLanguage = programmingLanguage;
         this.experiences = experiences;
         calculateSalary();
-        this.allowance = calculateAllowance();
+        calculateAllowance();
     }
 
     public String getProgrammingLanguage() {
@@ -38,14 +38,6 @@ public class Programmer extends Employee implements AllowanceCalculator{
 
     public void setExperiences(int experiences) {
         this.experiences = experiences;
-    }
-
-    public double getAllowance() {
-        return allowance;
-    }
-
-    public void setAllowance(double allowance) {
-        this.allowance = allowance;
     }
 
     @Override
@@ -71,17 +63,12 @@ public class Programmer extends Employee implements AllowanceCalculator{
     }
 
     @Override
-    // public String toString() {
-    // return "Programmer [programmingLanguage=" + programmingLanguage + ",
-    // experiences=" + experiences
-    // + ", allowance=" + allowance + "]";
-    // }
 
     public String toString() {
         return "Programmer [employeeId=" + getEmployeeId() + ", name=" + getName() + ", address=" + getAddress()
                 + ", age=" + getAge() + ", jobDesc=" + getJobDesc() + ", placement="
                 + getPlacement().getCity() + ", programmingLanguage=" + programmingLanguage + ", experiences="
-                + experiences + ", allowance=" + allowance + ", salary=" + getSalary() + "]";
+                + experiences + ", allowance=" + getAllowance() + ", salary=" + getSalary() + "]";
     }
 
 }
