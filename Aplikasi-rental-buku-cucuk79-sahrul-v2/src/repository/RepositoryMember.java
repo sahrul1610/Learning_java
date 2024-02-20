@@ -20,6 +20,8 @@ public class RepositoryMember {
         memberList.add(new Member("M-002", "Budi", "Bandung"));
         memberList.add(new Member("M-003", "Resti", "Kab. Bandung"));
 
+        
+
     }
 
 
